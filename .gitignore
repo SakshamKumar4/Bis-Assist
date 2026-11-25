@@ -31,8 +31,8 @@ faiss_index/
 # Streamlit
 .streamlit/secrets.toml
 
-# Data (large files / raw PDFs)
-data/raw/**/*.pdf
+# Data (keep official BIS PDFs tracked; ignore temporary large archives if any)
+# data/raw/**/*.pdf
 
 # Jupyter
 .ipynb_checkpoints/

@@ -43,7 +43,7 @@ Bis-Assist/
     ├── chunks.json     # 346 indexed chunks from 7 official BIS PDFs
     ├── index.faiss     # Pre-built FAISS vector index (ready for deployment)
     ├── intent.pkl      # Trained TF-IDF + Logistic Regression intent classifier
-    └── raw/            # Place local BIS PDFs/TXT documents here (PDFs are gitignored)
+    └── raw/            # 7 official BIS PDFs (grouped by category)
         ├── hallmarking/
         ├── certification/
         ├── electrical/
