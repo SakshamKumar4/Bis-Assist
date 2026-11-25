@@ -1,0 +1,10 @@
+pypdf
+sentence-transformers
+faiss-cpu
+scikit-learn
+pandas
+numpy
+streamlit
+requests
+joblib
+python-dotenv
