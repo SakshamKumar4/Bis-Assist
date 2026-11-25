@@ -29,7 +29,7 @@
 ## 🗂️ Project Structure
 
 ```
-bis-assistant/
+Bis-Assist/
 ├── app.py              # Gemini-style Streamlit UI with chat history & media upload
 ├── rag.py              # RAG pipeline, FAISS search, Gemini REST client & fallback logic
 ├── build_index.py      # Document chunking, SentenceTransformer embeddings & FAISS indexing
@@ -39,11 +39,15 @@ bis-assistant/
 ├── eval_questions.csv  # Benchmark evaluation questions with ground-truth sources
 ├── requirements.txt    # Python dependencies
 ├── .env.example        # Example environment config for GEMINI_API_KEY
-└── data/               # Place your BIS PDFs/TXT documents here
-    └── raw/
+└── data/
+    ├── chunks.json     # 346 indexed chunks from 7 official BIS PDFs
+    ├── index.faiss     # Pre-built FAISS vector index (ready for deployment)
+    ├── intent.pkl      # Trained TF-IDF + Logistic Regression intent classifier
+    └── raw/            # Place local BIS PDFs/TXT documents here (PDFs are gitignored)
+        ├── hallmarking/
+        ├── certification/
         ├── electrical/
-        ├── food/
-        └── toys/
+        └── standards/
 ```
 
 ---
@@ -70,8 +74,8 @@ bis-assistant/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/SakshamKumar4/bis-assistant.git
-cd bis-assistant
+git clone https://github.com/SakshamKumar4/Bis-Assist.git
+cd Bis-Assist
 ```
 
 ### 2. Create a virtual environment
@@ -92,7 +96,7 @@ Copy `.env.example` to `.env` and add your key:
 GEMINI_API_KEY=your_google_ai_studio_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
 ```
-> 💡 You can also paste the API key directly into the Streamlit sidebar at runtime — no `.env` file needed.
+> 💡 For Streamlit Cloud deployments, configure `GEMINI_API_KEY` in **App Settings → Secrets**.
 
 ---
 
@@ -100,20 +104,36 @@ GEMINI_MODEL=gemini-2.5-flash
 
 1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. Click **"Create API Key"**
-3. Copy the key and paste it into the app sidebar or into your `.env` file
+3. Copy the key and paste it into your `.env` file (or `rag.py`)
 
 ---
 
-## 📂 Adding Your Own BIS Documents
+## 📂 Indexed Official BIS Documents & Adding Your Own
 
-Place real BIS PDFs or TXT files into `data/raw/<category>/` (`electrical`, `food`, `toys`).  
-Use these **filename prefixes** for automatic intent routing:
+The repository ships with a pre-built FAISS index (`346` chunks in `data/index.faiss` & `data/chunks.json`) built from **7 official BIS documents** (`bis.gov.in` / `crsbis.in`):
+- **Hallmarking (`hallmark_*`):** Brief on Hallmarking Scheme (Oct 2026 stats), Revised Jeweller Registration Guidelines (Jul 2026), Mandatory Hallmarking Order — 385 Districts (Apr 2026)
+- **Certification Schemes (`scheme_*`):** Guidelines for Grant of Licence under Scheme-I (Feb 2026), CRS Scheme-II Revised Fee Structure
+- **Standards & QCOs (`std_*`):** Guidance Document on Quality Control Orders (QCOs), Simplified Procedure Product Listing (1,000+ IS standards)
+
+To add more documents, place BIS PDFs or TXT files into `data/raw/<category>/` using these **filename prefixes** for automatic intent routing:
 
 | Prefix | Document Type |
 |---|---|
-| `std_*` | Standards & product-to-standard specs (e.g. `std_electric_iron_is302.pdf`) |
+| `std_*` | Standards & product-to-standard specs (e.g. `std_qco_guidance_document.pdf`) |
 | `scheme_*` | Certification scheme guidelines, fee schedules, licensing procedures |
 | `hallmark_*` | Hallmarking guidelines, HUID verification, gold/silver purity rules |
+
+---
+
+## 🧪 Demo Showcase Questions
+
+Try these queries in the app to verify grounded PDF citations & intent routing:
+- *"What are the 3 marks in a gold hallmark under HUID and what is the hallmarking fee?"*
+- *"What is the CRS Scheme-II fee for a new application, annual licence fee, and application processing fee?"*
+- *"Under the 2026 Grant of Licence Guidelines, what are Option 1 and Option 2 for Scheme-I certification?"*
+- *"What is the penalty for contravention of a Quality Control Order (QCO) under the BIS Act 2016?"*
+- *"Which IS standard applies to Electric Instantaneous Water Heaters and Stationary Storage Type Electric Water Heaters?"*
+- *"Which IS standard covers Safety Of Toys and Safety of Electric Toys?"*
 
 ---
 

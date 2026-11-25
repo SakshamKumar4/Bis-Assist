@@ -887,8 +887,8 @@ if not st.session_state.messages:
             st.session_state.pending_query = "What is the process to apply for a certification licence?"
             st.rerun()
 
-        if st.button("🧸  What are the BIS certification rules for children's toys?", use_container_width=True):
-            st.session_state.pending_query = "What are the BIS certification rules for toys?"
+        if st.button("🧸  Which IS standards apply to Safety of Toys & Electric Toys?", use_container_width=True):
+            st.session_state.pending_query = "Which IS standard covers Safety Of Toys and Safety of Electric Toys?"
             st.rerun()
 
 # Render Previous Chat History
