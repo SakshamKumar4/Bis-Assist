@@ -7,6 +7,9 @@
 ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI-4285F4?logo=google&logoColor=white)
 ![FAISS](https://img.shields.io/badge/FAISS-Vector%20Search-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
+[![Live App](https://img.shields.io/badge/Live%20App-Streamlit%20Cloud-FF4B4B?logo=streamlit&logoColor=white)](https://bis-assist.streamlit.app/)
+
+> 🌐 **Live Demo:** The project is live and deployed on **[https://bis-assist.streamlit.app/](https://bis-assist.streamlit.app/)**
 
 ---
 
