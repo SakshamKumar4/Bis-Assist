@@ -144,3 +144,10 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 **Saksham Kumar**  
 GitHub: [@SakshamKumar4](https://github.com/SakshamKumar4)
+
+---
+
+## 🤝 Contributors
+
+- **Udit Taneja**
+- **Ved Singh**
