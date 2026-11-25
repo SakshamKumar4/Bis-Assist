@@ -110,10 +110,17 @@ GEMINI_MODEL=gemini-2.5-flash
 
 ## 📂 Indexed Official BIS Documents & Adding Your Own
 
-The repository ships with a pre-built FAISS index (`346` chunks in `data/index.faiss` & `data/chunks.json`) built from **7 official BIS documents** (`bis.gov.in` / `crsbis.in`):
-- **Hallmarking (`hallmark_*`):** Brief on Hallmarking Scheme (Oct 2026 stats), Revised Jeweller Registration Guidelines (Jul 2026), Mandatory Hallmarking Order — 385 Districts (Apr 2026)
-- **Certification Schemes (`scheme_*`):** Guidelines for Grant of Licence under Scheme-I (Feb 2026), CRS Scheme-II Revised Fee Structure
-- **Standards & QCOs (`std_*`):** Guidance Document on Quality Control Orders (QCOs), Simplified Procedure Product Listing (1,000+ IS standards)
+The repository includes **7 official BIS PDFs** (`4.48 MB` total) and a pre-built FAISS index (**346 chunks** in [`data/index.faiss`](data/index.faiss) & [`data/chunks.json`](data/chunks.json)):
+
+| Local PDF in Repo | Document Title & Reference | Intent Type | Chunks | Official BIS Source |
+|---|---|---|---|---|
+| [hallmark_brief_on_hallmarking.pdf](data/raw/hallmarking/hallmark_brief_on_hallmarking.pdf) | Brief on Hallmarking Scheme (Oct 2026 stats, HUID, IS 1417, IS 2112:2025) | `hallmarking` | 10 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf) |
+| [hallmark_guidelines_jewellers_2026.pdf](data/raw/hallmarking/hallmark_guidelines_jewellers_2026.pdf) | Revised Guidelines for Jewellers (`HMD/14:7`, 02 Jul 2026) | `hallmarking` | 42 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2026/07/Guidelines-for-Jewellers.pdf) |
+| [hallmark_mandatory_order_385_districts_2026.pdf](data/raw/hallmarking/hallmark_mandatory_order_385_districts_2026.pdf) | Mandatory Hallmarking Amendment Order — 385 Districts (Gazette, 28 Apr 2026) | `hallmarking` | 22 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2026/05/Hallmarking-of-gold-jewellery-and-gold-artefacts-order-2026-second-amendments-385-districts-1.pdf) |
+| [scheme_grant_of_licence_guidelines_2026.pdf](data/raw/certification/scheme_grant_of_licence_guidelines_2026.pdf) | Guidelines for Grant of Licence under Scheme-I (`CMD-I/2:12:1`, 25 Feb 2026) | `certification_process` | 169 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2026/02/GrantofLicence-Guidelines-25Feb2026.pdf) |
+| [scheme_crs_revised_fee_structure.pdf](data/raw/electrical/scheme_crs_revised_fee_structure.pdf) | Revised Fee Structure — CRS Scheme-II (pursuant to 25 Feb 2026 amendment) | `certification_process` | 3 | [crsbis.in PDF](https://www.crsbis.in/BIS/app_srv/tdc/gl/docs/Revised_Fee_Structure.pdf) |
+| [std_qco_guidance_document.pdf](data/raw/standards/std_qco_guidance_document.pdf) | Guidance Document on Quality Control Orders (QCOs) & BIS Act, 2016 Penalties | `standard_lookup` | 7 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2021/07/Guidance-document-on-QCOs-Revised-1.pdf) |
+| [std_simplified_procedure_products_2024.pdf](data/raw/standards/std_simplified_procedure_products_2024.pdf) | List of Products Under Simplified Procedure (1,000+ IS Standards) | `standard_lookup` | 93 | [bis.gov.in PDF](https://www.bis.gov.in/wp-content/uploads/2024/11/List-of-Products-Under-Simplified-Procedure.pdf) |
 
 To add more documents, place BIS PDFs or TXT files into `data/raw/<category>/` using these **filename prefixes** for automatic intent routing:
 
@@ -154,6 +161,25 @@ streamlit run app.py
 ```
 
 Open **http://localhost:8501** in your browser. 🎉
+
+---
+
+## 📚 References
+
+Official portals and primary regulatory documents used in this project:
+1. **Bureau of Indian Standards (BIS) Official Website:** https://www.bis.gov.in/
+2. **BIS Hallmarking Scheme Overview:** https://www.bis.gov.in/hallmarking-overview/hallmarking-scheme/
+3. **BIS Product Certification Process (Scheme-I):** https://www.bis.gov.in/product-certification/product-certification-process/
+4. **BIS Compulsory Registration Scheme (CRS / Scheme-II):** https://www.bis.gov.in/compulsory-registration-scheme/ & https://www.crsbis.in/
+5. **BIS Manakonline Portal:** https://www.manakonline.in/
+6. **Indexed Official PDFs:**
+   - BIS Hallmarking Department, *Brief on Hallmarking Scheme* — [PDF](https://www.bis.gov.in/wp-content/uploads/2020/12/brief-on-Hallmarking.pdf) · [Local Copy](data/raw/hallmarking/hallmark_brief_on_hallmarking.pdf)
+   - BIS Hallmarking Department, *Revised Guidelines for Grant, Operation, Surveillance & Cancellation of Certificate of Registration of Jeweller* (`HMD/14:7`, 02 July 2026) — [PDF](https://www.bis.gov.in/wp-content/uploads/2026/07/Guidelines-for-Jewellers.pdf) · [Local Copy](data/raw/hallmarking/hallmark_guidelines_jewellers_2026.pdf)
+   - Ministry of Consumer Affairs, Food and Public Distribution, *Hallmarking of Gold Jewellery and Gold Artefacts (Amendment) Order, 2026 — 385 Districts* (Gazette of India, 28 April 2026) — [PDF](https://www.bis.gov.in/wp-content/uploads/2026/05/Hallmarking-of-gold-jewellery-and-gold-artefacts-order-2026-second-amendments-385-districts-1.pdf) · [Local Copy](data/raw/hallmarking/hallmark_mandatory_order_385_districts_2026.pdf)
+   - BIS Central Marks Department-I, *Guidelines for Grant of Licence (GoL) under Scheme-I of Schedule-II* (`CMD-I/2:12:1`, 25 February 2026) — [PDF](https://www.bis.gov.in/wp-content/uploads/2026/02/GrantofLicence-Guidelines-25Feb2026.pdf) · [Local Copy](data/raw/certification/scheme_grant_of_licence_guidelines_2026.pdf)
+   - BIS CRS Portal, *Fee Structure – CRS (Scheme-II)* (pursuant to 25 February 2026 amendment) — [PDF](https://www.crsbis.in/BIS/app_srv/tdc/gl/docs/Revised_Fee_Structure.pdf) · [Local Copy](data/raw/electrical/scheme_crs_revised_fee_structure.pdf)
+   - Bureau of Indian Standards, *Guidance Document on Quality Control Orders (QCOs)* — [PDF](https://www.bis.gov.in/wp-content/uploads/2021/07/Guidance-document-on-QCOs-Revised-1.pdf) · [Local Copy](data/raw/standards/std_qco_guidance_document.pdf)
+   - Bureau of Indian Standards, *List of Products Under Simplified Procedure (Option-2)* — [PDF](https://www.bis.gov.in/wp-content/uploads/2024/11/List-of-Products-Under-Simplified-Procedure.pdf) · [Local Copy](data/raw/standards/std_simplified_procedure_products_2024.pdf)
 
 ---
 
